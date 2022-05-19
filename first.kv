@@ -1,0 +1,302 @@
+ScreenManager:
+    id: _screen_manager
+    Screen:
+        name: 'screen1'
+        GridLayout:
+            cols:1
+            TextInput:
+                id: _a
+                hint_text: 'weight'
+            TextInput:
+                id: _b
+                hint_text: 'height'
+            TextInput:
+                id: _c
+                hint_text: 'age'
+            Label:
+                id: _result
+            Button:
+                text: 'MAN BMR'
+                on_press: _result.text = str(float(66.47)+(float(13.75)*float(_a.text)) + (float(5)*float(_b.text))-float(6.76)*float(_c.text))
+            Button:
+                text: 'WOMAN BMR'
+                on_press: _result.text = str(float(665.1)+(float(9.56)*float(_a.text)) + (float(1.85)*float(_b.text))-float(4.68)*float(_c.text))
+            Button:
+                text: 'NEXT'
+                on_press: _screen_manager.current = 'screen2'
+    Screen:
+        name: 'screen2'
+        GridLayout:
+            cols:2
+            Button:
+                text: 'Breakfast'
+                on_press: _screen_manager.current = 'deep1'
+            Label:
+                id:_calorie1
+
+            Button:
+                text: 'Lunch'
+                on_press: _screen_manager.current = 'deep2'
+            Label:
+                id:_calorie2
+            Button:
+                text: 'Dinner'
+                on_press: _screen_manager.current = 'deep3'
+            Label:
+                id:_calorie3
+            Button:
+                text:'sum calorie'
+                on_press: _tcalorie.text = str(float(_calorie1.text)+float(_calorie2.text)+float(_calorie3.text))
+            Label:
+                id:_tcalorie
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'screen1'
+            Button:
+                text: 'Go To Exercise'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'deep1'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label11
+            Image:
+                id: img11
+                source: ""
+
+            FileChooserListView:
+                id: filechooser
+                on_selection: app.image_select(filechooser.selection)
+
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image11()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+
+    Screen:
+        name: 'deep2'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label22
+            Image:
+                id: img22
+                source: ""
+
+            FileChooserListView:
+                id: filechooser1
+                on_selection: app.image_select1(filechooser1.selection)
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image22()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+    Screen:
+        name: 'deep3'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label33
+            Image:
+                id: img33
+                source: ""
+
+            FileChooserListView:
+                id: filechooser2
+                on_selection: app.image_select2(filechooser2.selection)
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image33()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+    Screen:
+        name: 'menu1'
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Label:
+                    id: hard111
+                Button:
+                    text: 'Burn everything?'
+
+                    on_press:
+                        hard111.text = str(float(_tcalorie.text))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'hard'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: med111
+                Button:
+                    text: 'Burn half?'
+                    on_press: med111.text = str(float(_tcalorie.text)*float(0.5))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'medium'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: easy111
+                Button:
+                    text: 'Burn little?'
+                    on_press: easy111.text = str(float(_tcalorie.text)-float(_result.text))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'easy'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Back'
+                    on_press: _screen_manager.current = 'screen2'
+
+
+    Screen:
+        name: 'hard'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'hard1'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'hard2'
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'medium'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'med1'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'med2'
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'easy'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'easy1'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'easy2'
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+
+
+    Screen:
+        name: 'hard1'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final1'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final2'
+    Screen:
+        name: 'hard2'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final3'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final4'
+    Screen:
+        name: 'med1'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final5'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final6'
+    Screen:
+        name: 'med2'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final7'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final8'
+    Screen:
+        name: 'easy1'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final9'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final10'
+    Screen:
+        name: 'easy2'
+        BoxLayout:
+            Button:
+                text: '0.5 Hour'
+                on_press: _screen_manager.current = 'final11'
+
+            Button:
+                text: '1 Hour'
+                on_press: _screen_manager.current = 'final12'
+    Screen:
+        name: 'final1'
+        BoxLayout:
+            Label:
+                id:_speed1
+            Button:
+                text:'How fast?'
+                on_press: app.speed_calc(_a, hard111)
+
+            Label:
+                id:_level1
+            Button:
+                text:'With angle?'
+                on_press: _level1.text = 'Yes Angle!'
+
+            Label:
+                id:_time1
+            Button:
+                text:'How long?'
+                on_press: _time1.text = '30 minute!'
+
+            Button:
+                text:'Lets start'
